@@ -30,7 +30,7 @@ jobs:
           Restart-Service -Name TermService -Force
 
       - name: Create RDP User with Secure Password
-        shell: pwsh
+        shell: powershell
         run: |
           Add-Type -AssemblyName System.Security
           $charSet = @{
@@ -56,7 +56,7 @@ jobs:
           }
 
       - name: Install Tailscale
-        shell: pwsh
+        shell: powershell
         run: |
           $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
           $installerPath = "$env:TEMP\tailscale.msi"
@@ -65,7 +65,7 @@ jobs:
           Remove-Item $installerPath -Force
 
       - name: Establish Tailscale Connection
-        shell: pwsh
+        shell: powershell
         run: |
           & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-$env:GITHUB_RUN_ID
           $tsIP = $null
