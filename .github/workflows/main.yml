@@ -25,9 +25,7 @@ jobs:
           # Allow incoming RDP connections on port 3389
           netsh advfirewall firewall add rule name="RDP-Tailscale" `
             dir=in action=allow protocol=TCP localport=3389
-
-          # Restart Remote Desktop service to apply changes
-          Restart-Service -Name TermService -Force
+          
 
       - name: Create RDP User with Secure Password
         shell: powershell
